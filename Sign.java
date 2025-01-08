@@ -2,8 +2,6 @@ public class Sign {
     
     private String message = "";
     private int width;
-    private double len = message.length();
-    private int lines = (int) Math.ceil((double) len / width);
 
     public Sign(String m, int w) {
         message = m;
@@ -11,13 +9,20 @@ public class Sign {
     }
 
     public int numberOfLines() {
+        double len = message.length();
+        int lines = (int) Math.ceil((double) len / width);
         return lines;
     }
 
     public String getLines() {
-        
-        return "";
+        String linedMessage = "";
+        for (int i = 0; i < message.length(); i += width) {
+            linedMessage += message.substring(i, Math.min(i + width, message.length()));
+            if (i + width < message.length()) {
+                linedMessage += ";";
+            }
+        }
+        return linedMessage;
     }
-
 
 }
